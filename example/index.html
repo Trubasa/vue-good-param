@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <!--该项目依赖于vue，element-ui，如果您的项目已经引用过，可以不必再次引入-->
+  <!--vue-->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <!--element-ui-->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+  <!--必须保证在vue和element-ui的引入之后-->
+  <!--vue-picture-manager-->
+
+  <script src="../static/data.js"></script>
+  <script src="../dist/vue-good-param.js"></script>
+</head>
+<body>
+该组件需要与后台接口交互，故这里展示的例子稍有缺陷，实际与后台打工后可正常使用<br><br>
+<div id="app">
+  <good-param
+    ref="goodParam"
+    v-model="selectedList"
+    :param-list="options"
+    @add-param-option="addParamOption"
+    @delete-param-option="deleteParamOption"
+    @edit-param-option="editParamOption"
+    @delete-param="deleteParam"
+    @add-param="addParam"
+    @edit-param="editParam">
+  </good-param>
+</div>
+
+
+</body>
+<script>
+  var app=new Vue({
+    el:"#app",
+    data:function () {
+      return {
+        msg: 'Welcome to Your Vue.js App',
+        options:myData.paramList,
+        selectedList:'2-3,1-1'
+      }
+    },
+    methods: {
+      addParamOption:function(res){
+        res.data.target.params.push({
+          id:new Date().getTime(),
+          name:res.data.name
+        })
+        //this.$message.success('添加成功');
+        res.finish(); //添加成功后，关闭窗口
+      },
+      editParamOption:function(res){
+        res.finish();
+      },
+      deleteParamOption:function(res){
+
+        res.finish();
+
+      },
+      editParam:function(res){
+        console.log(res.data);
+
+        // this.options=myData.paramList2;
+
+        res.finish();
+      },
+      deleteParam:function(res){
+        console.log(res);
+        var deleteIndex='';
+        this.options.forEach(function (ele,index) {
+          if(res.data.id==ele.id){
+            deleteIndex=index
+          }
+        });
+        if(deleteIndex!==''){
+          this.options.splice(deleteIndex,1)
+        }
+
+        //this.$message.success('删除成功');
+        res.finish();
+      },
+      addParam:function(res){
+        console.log(res);
+        this.options.push({
+          id:new Date().getTime(),
+          name:res.data.name,
+          width:res.data.width,
+          params:[]
+        });
+        //this.$message.success('添加成功');
+        res.finish(); //添加成功后，关闭窗口
+      }
+    }
+  })
+</script>
+</html>
