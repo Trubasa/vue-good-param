@@ -10,13 +10,13 @@
 ```html
 <good-param
     ref="goodParam"    
-    v-model="selectedList"  商品的参数,以逗号分隔，例如:"SADF2D,ASDF3N,AZF2"
-    :param-list="options"   参数的树状列表
-    @add-param-option="addParamOption" 添加属性的选项回调
-    @delete-param-option="deleteParamOption" 删除属性的选项回调
-    @edit-param-option="editParamOption" 编辑属性的选项回调
-    @delete-param="deleteParam" 删除属性回调
-    @add-param="addParam" 添加属性回调
-    @edit-param="editParam"> 编辑属性回调
+    v-model="selectedList"                      商品的参数,以逗号分隔，例如:"SADF2D,ASDF3N,AZF2"
+    :param-list="options"                       参数的树状列表
+    @add-param-option="addParamOption"          添加属性的选项回调
+    @delete-param-option="deleteParamOption"    删除属性的选项回调
+    @edit-param-option="editParamOption"        编辑属性的选项回调
+    @delete-param="deleteParam"                 删除属性回调
+    @add-param="addParam"                       添加属性回调
+    @edit-param="editParam">                    编辑属性回调
   </good-param>
 ```
